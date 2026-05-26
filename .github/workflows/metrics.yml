@@ -1,0 +1,51 @@
+name: Full GitHub Metrics
+on:
+  schedule: [{cron: "0 * * * *"}] # Chạy mỗi tiếng 1 lần để tiết kiệm tài nguyên
+  workflow_dispatch:
+  push: {branches: ["master", "main"]}
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Full Detailed Metrics
+        uses: lowlighter/metrics@latest
+        with:
+          filename: github-metrics.svg
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: huuhiep-dev
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Asia/Ho_Chi_Minh 
+          
+          # Hiển thị lịch đóng góp 3D
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: full-year
+          
+          # Thống kê ngôn ngữ chi tiết
+          plugin_languages: yes
+          plugin_languages_details: bytes-size, percentage
+          plugin_languages_limit: 8
+          plugin_languages_sections: most-used
+          
+          # Các thành tựu đạt được
+          plugin_achievements: yes
+          plugin_achievements_display: compact
+          plugin_achievements_threshold: B
+          
+          # Các dự án nổi bật (Notable contributions)
+          plugin_notable: yes
+          plugin_notable_from: all
+          plugin_notable_types: commit, pull_request
+          
+          # Thói quen lập trình (Xem bạn hay code vào giờ nào)
+          plugin_habits: yes
+          plugin_habits_facts: yes
+          plugin_habits_charts: yes
+          
+          # Hiển thị các Topic (lĩnh vực) bạn hay làm việc
+          plugin_topics: yes
+          plugin_topics_limit: 15
+          plugin_topics_mode: icons
+
+          # Điểm đánh giá (Star, Follower, v.v.)
+          plugin_lines: yes
