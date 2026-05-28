@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <td width="300">
+    <td width="400">
       <img src="github-metrics.svg" alt="GitHub Metrics" />
     </td>
     <td align="right" valign="top">
